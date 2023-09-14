@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CounterScreen extends StatelessWidget{
-
+class CounterScreen extends StatefulWidget{
+  
   const CounterScreen({super.key});
-  //int _count = 0;
+  
+  @override
+  State<CounterScreen> createState()=> _CounterScreenState();
+}
+  class _CounterScreenState extends State<CounterScreen>{
+  int clickCounter=0;
 
   @override
   Widget build(BuildContext context){
     return  Scaffold(
       appBar: AppBar(
-        title: const Text('Sample Code Counter Screen') ,
+        title: const Text('Counter Screen') ,
         centerTitle:true,
         elevation: 2,
         
@@ -18,8 +23,8 @@ class CounterScreen extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
-            Text('12', style: TextStyle(fontSize: 160,fontWeight: FontWeight.w100)),
-            Text('Clicks')
+            Text('$clickCounter', style: TextStyle(fontSize: 160,fontWeight: FontWeight.w100)),
+            Text('Click${clickCounter==1 ? '':'s'}',style: TextStyle(fontSize: 22),)
           ],
             
         ),
@@ -27,10 +32,15 @@ class CounterScreen extends StatelessWidget{
 
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: (){},
-        tooltip: 'Increment Counter',
-        child: const Icon(Icons.plus_one),
-          ),
+          onPressed: (){
+            setState(() {
+              clickCounter++;
+            });
+          },
+          tooltip: 'Increment Counter',
+          child: const Icon(Icons.plus_one), 
+          
+        ),
     );
   }
 }
